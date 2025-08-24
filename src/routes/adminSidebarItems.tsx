@@ -1,18 +1,20 @@
+import AddDivistion from "@/pages/Admin/AddDivistion";
 import AddTour from "@/pages/Admin/AddTour";
+import AddTourTypes from "@/pages/Admin/AddTourTypes";
 // import Analytics from "@/pages/Admin/Analytics";
 import { ISidebarItem } from "@/types";
 import { lazy } from "react";
 
-const Analytics = lazy(()=> import("@/pages/Admin/Analytics"))
+const Analytics = lazy(() => import("@/pages/Admin/Analytics"));
 
-export const adminSidebarItems :ISidebarItem[] = [
+export const adminSidebarItems: ISidebarItem[] = [
   {
     title: "Dashbord",
     items: [
       {
         title: "Analytics",
         url: "/admin/analytics",
-        component:Analytics
+        component: Analytics,
       },
     ],
   },
@@ -20,14 +22,19 @@ export const adminSidebarItems :ISidebarItem[] = [
     title: "Tour-Managment",
     items: [
       {
-        title: "AddTour",
-        url: "/admin/addTour",
-        component:AddTour
+        title: "Add Tour Types",
+        url: "/admin/addTourTypes",
+        component: AddTourTypes,
       },
       {
-        title: "AddTourTypes",
-        url: "/admin/addTourTypes",
-        component:AddTour
+        title: "Add Divistion",
+        url: "/admin/addDivition",
+        component: AddDivistion,
+      },
+      {
+        title: "Add Tour",
+        url: "/admin/addTour",
+        component: AddTour,
       },
     ],
   },
