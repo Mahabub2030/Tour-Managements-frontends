@@ -19,12 +19,16 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { useAddDivisionMutation } from "@/redux/features/divition/divisionApi";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 export function AddDivitionModal() {
+  const [open, setOpen] = useState(false);
   const [image, setImage] = useState<File | null>(null);
+  const [addDiviton] = useAddDivisionMutation();
 
-  console.log("insie add deviviotn moadl",image)
+  console.log("insie add deviviotn moadl", image);
 
   const form = useForm({
     defaultValues: {
@@ -34,21 +38,25 @@ export function AddDivitionModal() {
   });
 
   const onSubmit = async (data) => {
-  
+    const formData = new FormData();
+    formData.append("data", JSON.stringify(data));
+    formData.append("file", image as File);
 
-    const formData = new FormData()
-    formData.append("data",JSON.stringify(data));
-    formData.append("file",image as File)
-
-    console.log(formData)
+    console.log(formData);
 
     // console.log(formData.get("data"))
     // console.log(formData.get("file"))
 
-
+    try {
+      const res = await addDiviton(formData).unwrap();
+      toast.success("Division Added Successfully");
+        setOpen(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button>Add Division</Button>
       </DialogTrigger>
